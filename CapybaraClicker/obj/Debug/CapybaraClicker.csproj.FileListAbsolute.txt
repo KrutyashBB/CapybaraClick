@@ -1,0 +1,11 @@
+C:\Users\Krutyash\RiderProjects\CapybaraClicker\CapybaraClicker\bin\Debug\CapybaraClicker.exe.config
+C:\Users\Krutyash\RiderProjects\CapybaraClicker\CapybaraClicker\bin\Debug\CapybaraClicker.exe
+C:\Users\Krutyash\RiderProjects\CapybaraClicker\CapybaraClicker\bin\Debug\CapybaraClicker.pdb
+C:\Users\Krutyash\RiderProjects\CapybaraClicker\CapybaraClicker\obj\Debug\CapybaraClicker.csproj.AssemblyReference.cache
+C:\Users\Krutyash\RiderProjects\CapybaraClicker\CapybaraClicker\obj\Debug\CapybaraClicker.csproj.SuggestedBindingRedirects.cache
+C:\Users\Krutyash\RiderProjects\CapybaraClicker\CapybaraClicker\obj\Debug\CapybaraClicker.Properties.Resources.resources
+C:\Users\Krutyash\RiderProjects\CapybaraClicker\CapybaraClicker\obj\Debug\CapybaraClicker.csproj.GenerateResource.cache
+C:\Users\Krutyash\RiderProjects\CapybaraClicker\CapybaraClicker\obj\Debug\CapybaraClicker.csproj.CoreCompileInputs.cache
+C:\Users\Krutyash\RiderProjects\CapybaraClicker\CapybaraClicker\obj\Debug\CapybaraClicker.exe
+C:\Users\Krutyash\RiderProjects\CapybaraClicker\CapybaraClicker\obj\Debug\CapybaraClicker.pdb
+C:\Users\Krutyash\RiderProjects\CapybaraClicker\CapybaraClicker\obj\Debug\CapybaraClicker.Form1.resources
