@@ -47,8 +47,6 @@
             this.capybaraStudentCell = new System.Windows.Forms.PictureBox();
             this.capybaraFishCell = new System.Windows.Forms.PictureBox();
             this.capybaraChildCell = new System.Windows.Forms.PictureBox();
-            this.modificationsShopButton = new System.Windows.Forms.Button();
-            this.capybarasShopButton = new System.Windows.Forms.Button();
             this.modificationsPanel = new System.Windows.Forms.Panel();
             this.modifPanel4 = new System.Windows.Forms.Panel();
             this.modifButton4 = new System.Windows.Forms.Button();
@@ -70,6 +68,8 @@
             this.smallModifLabel1 = new System.Windows.Forms.Label();
             this.bigModifLabel1 = new System.Windows.Forms.Label();
             this.modifIcon1 = new System.Windows.Forms.PictureBox();
+            this.modificationsShopButton = new System.Windows.Forms.Button();
+            this.capybarasShopButton = new System.Windows.Forms.Button();
             this.sumCoinsLabel = new System.Windows.Forms.Label();
             this.bigCoinIcon = new System.Windows.Forms.PictureBox();
             this.coinsPerSecondLabel = new System.Windows.Forms.Label();
@@ -342,30 +342,6 @@
             this.capybaraChildCell.MouseDown += new System.Windows.Forms.MouseEventHandler(this.capybaraCell_MouseDown);
             this.capybaraChildCell.MouseUp += new System.Windows.Forms.MouseEventHandler(this.capybaraCell_MouseUp);
             // 
-            // modificationsShopButton
-            // 
-            this.modificationsShopButton.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.modificationsShopButton.BackgroundImage = global::CapybaraClicker.Properties.Resources.shopIcon;
-            this.modificationsShopButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.modificationsShopButton.Location = new System.Drawing.Point(728, 433);
-            this.modificationsShopButton.Name = "modificationsShopButton";
-            this.modificationsShopButton.Size = new System.Drawing.Size(162, 74);
-            this.modificationsShopButton.TabIndex = 6;
-            this.modificationsShopButton.UseVisualStyleBackColor = false;
-            this.modificationsShopButton.Click += new System.EventHandler(this.modificationsShopButton_Click);
-            // 
-            // capybarasShopButton
-            // 
-            this.capybarasShopButton.BackColor = System.Drawing.Color.SpringGreen;
-            this.capybarasShopButton.BackgroundImage = global::CapybaraClicker.Properties.Resources.capybaraIcon;
-            this.capybarasShopButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.capybarasShopButton.Location = new System.Drawing.Point(933, 433);
-            this.capybarasShopButton.Name = "capybarasShopButton";
-            this.capybarasShopButton.Size = new System.Drawing.Size(162, 74);
-            this.capybarasShopButton.TabIndex = 7;
-            this.capybarasShopButton.UseVisualStyleBackColor = false;
-            this.capybarasShopButton.Click += new System.EventHandler(this.capybarasShopButton_Click);
-            // 
             // modificationsPanel
             // 
             this.modificationsPanel.AutoScroll = true;
@@ -406,7 +382,7 @@
             this.modifButton4.Tag = "10000";
             this.modifButton4.Text = "10K";
             this.modifButton4.UseVisualStyleBackColor = false;
-            this.modifButton4.Click += new System.EventHandler(this.modifButton_Click);
+            this.modifButton4.Click += new System.EventHandler(this.modificationBuyButton_Click);
             // 
             // smallModifLabel4
             // 
@@ -469,7 +445,7 @@
             this.modifButton3.Tag = "1500";
             this.modifButton3.Text = "1.5K";
             this.modifButton3.UseVisualStyleBackColor = false;
-            this.modifButton3.Click += new System.EventHandler(this.modifButton_Click);
+            this.modifButton3.Click += new System.EventHandler(this.modificationBuyButton_Click);
             // 
             // smallModifLabel3
             // 
@@ -532,7 +508,7 @@
             this.modifButton2.Tag = "100";
             this.modifButton2.Text = "100";
             this.modifButton2.UseVisualStyleBackColor = false;
-            this.modifButton2.Click += new System.EventHandler(this.modifButton_Click);
+            this.modifButton2.Click += new System.EventHandler(this.modificationBuyButton_Click);
             // 
             // smallModifLabel2
             // 
@@ -595,7 +571,7 @@
             this.modifButton1.Tag = "20";
             this.modifButton1.Text = "20";
             this.modifButton1.UseVisualStyleBackColor = false;
-            this.modifButton1.Click += new System.EventHandler(this.modifButton_Click);
+            this.modifButton1.Click += new System.EventHandler(this.modificationBuyButton_Click);
             // 
             // smallModifLabel1
             // 
@@ -630,6 +606,30 @@
             this.modifIcon1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.modifIcon1.TabIndex = 0;
             this.modifIcon1.TabStop = false;
+            // 
+            // modificationsShopButton
+            // 
+            this.modificationsShopButton.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.modificationsShopButton.BackgroundImage = global::CapybaraClicker.Properties.Resources.shopIcon;
+            this.modificationsShopButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.modificationsShopButton.Location = new System.Drawing.Point(728, 433);
+            this.modificationsShopButton.Name = "modificationsShopButton";
+            this.modificationsShopButton.Size = new System.Drawing.Size(162, 74);
+            this.modificationsShopButton.TabIndex = 6;
+            this.modificationsShopButton.UseVisualStyleBackColor = false;
+            this.modificationsShopButton.Click += new System.EventHandler(this.modificationsShopButton_Click);
+            // 
+            // capybarasShopButton
+            // 
+            this.capybarasShopButton.BackColor = System.Drawing.Color.SpringGreen;
+            this.capybarasShopButton.BackgroundImage = global::CapybaraClicker.Properties.Resources.capybaraIcon;
+            this.capybarasShopButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.capybarasShopButton.Location = new System.Drawing.Point(933, 433);
+            this.capybarasShopButton.Name = "capybarasShopButton";
+            this.capybarasShopButton.Size = new System.Drawing.Size(162, 74);
+            this.capybarasShopButton.TabIndex = 7;
+            this.capybarasShopButton.UseVisualStyleBackColor = false;
+            this.capybarasShopButton.Click += new System.EventHandler(this.capybarasShopButton_Click);
             // 
             // sumCoinsLabel
             // 

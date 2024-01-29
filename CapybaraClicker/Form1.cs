@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 using CapybaraClicker.Properties;
 
@@ -9,40 +7,14 @@ namespace CapybaraClicker
 {
     public partial class Form1 : Form
     {
-        private const int SkySpeed = 4;
-        private readonly Random _rand = new Random();
-        private int _sumMoney;
-        private bool _is2X;
-        private int _coinsPerSecond;
-        private int _coinsPerClick = 1;
-        private const int FillingSpeedProgressBar = 8;
         readonly CustomProgressBar _customProgressBar = new CustomProgressBar();
-
-        private readonly List<Capybara> _capybarasList = new List<Capybara>
-        {
-            new Capybara(Resources.capybara_fish, 100),
-            new Capybara(Resources.capybara_student, 1000),
-            new Capybara(Resources.capybara_cook, 8000),
-            new Capybara(Resources.capybara_skate, 75000),
-            new Capybara(Resources.capybara_board, 500000)
-        };
-
-        private readonly List<Modification> _modificationsList = new List<Modification>()
-        {
-            new Modification(Resources.modifIcon1, "Монетка", "+1 Монета в сек.", 20, 1,
-                TypesOfModifications.AddCoinsPerSecond),
-            new Modification(Resources.modifIcon2, "Лёгкий клик", "+1 Монета за клик", 100, 1,
-                TypesOfModifications.AddCoinsPerClick),
-            new Modification(Resources.modifIcon3, "Парочка", "+25 Монет в сек.", 1500, 25,
-                TypesOfModifications.AddCoinsPerSecond),
-            new Modification(Resources.modifIcon4, "Мощный клик", "+50 Монет за клик", 10000, 50,
-                TypesOfModifications.AddCoinsPerClick)
-        };
+        private GameModel _model;
 
         public Form1()
         {
             InitializeComponent();
             CreateProgressBar();
+            _model = new GameModel();
         }
 
         private void CreateProgressBar()
@@ -81,7 +53,7 @@ namespace CapybaraClicker
 
         private void timerAddCoinsPerSecond_Tick(object sender, EventArgs e)
         {
-            _sumMoney += _coinsPerSecond;
+            _model.AddingCoinsPerSecond();
         }
 
         private void mainTimer_Tick(object sender, EventArgs e)
@@ -89,11 +61,11 @@ namespace CapybaraClicker
             if (_customProgressBar.Value > 0)
                 _customProgressBar.Value -= 1;
 
-            sumCoinsLabel.Text = FormatCoinCount(_sumMoney);
+            sumCoinsLabel.Text = FormatCoinCount(_model.GetSumCoins());
 
             Update2XStatus();
             UpdateModificationsPanel();
-            UpdateCapybarasBuyButton();
+            ChangeStateCapybaraBuyButton();
             MoveSky();
         }
 
@@ -112,19 +84,19 @@ namespace CapybaraClicker
 
         private void Update2XStatus()
         {
-            _is2X = _customProgressBar.Value >= 70;
-            coinsPerClickLabel.Text = $"{int.Parse(FormatCoinCount(_coinsPerClick)) * (_is2X ? 2 : 1)} за клик";
+            _model.Change2XStatus(_customProgressBar.Value >= 70);
+            coinsPerClickLabel.Text = $"{FormatCoinCount(_model.CoinsPerClick * (_model.Is2X ? 2 : 1))} за клик";
         }
 
         private void UpdateModificationsPanel()
         {
-            foreach (var modification in _modificationsList)
+            foreach (var modification in _model._modificationsList)
                 UpdateModificationPanel(modification);
         }
 
         private void UpdateModificationPanel(Modification modification)
         {
-            if (_sumMoney >= modification.Cost)
+            if (_model.SumMoney >= modification.Cost)
                 EnableModificationPanel(modification);
             else
                 DisableModificationPanel(modification);
@@ -172,36 +144,38 @@ namespace CapybaraClicker
                     buyButton.Enabled = false;
         }
 
-        private void UpdateCapybarasBuyButton()
+        private void ChangeStateCapybaraBuyButton()
         {
             foreach (Control control in capybarasPanel.Controls)
-                if (control is Button && int.Parse((string)control.Tag) <= _sumMoney)
-                    control.Enabled = true;
+                if (control is Button && control.Visible)
+                {
+                    var capybaraCost = int.Parse((string)control.Tag);
+                    control.Enabled = capybaraCost <= _model.SumMoney;
+                }
         }
 
         private void MoveSky()
         {
+            const int skySpeed = 4;
+            var rand = new Random();
+
             foreach (Control control in Controls)
                 if ((string)control.Tag == "sky")
                 {
-                    control.Left -= SkySpeed;
+                    control.Left -= skySpeed;
                     if (control.Left <= -250)
                     {
-                        var skyPos = _rand.Next(1200, 1800);
+                        var skyPos = rand.Next(1200, 1800);
                         control.Left = skyPos;
                     }
                 }
         }
-        
+
         private void capybara_MouseDown(object sender, MouseEventArgs e)
         {
-            if (_customProgressBar.Value + FillingSpeedProgressBar <= 100)
-                _customProgressBar.Value += FillingSpeedProgressBar;
+            FillProgressBar();
 
-            if (_is2X)
-                _sumMoney += _coinsPerClick * 2;
-            else
-                _sumMoney += _coinsPerClick;
+            _model.AddingCoinsPerClick();
 
             capybara.Width -= 30;
             capybara.Height -= 30;
@@ -216,6 +190,13 @@ namespace CapybaraClicker
                 timer.Dispose();
             };
             timer.Start();
+        }
+
+        private void FillProgressBar()
+        {
+            const int fillingSpeedProgressBar = 8;
+            if (_customProgressBar.Value + fillingSpeedProgressBar <= 100)
+                _customProgressBar.Value += fillingSpeedProgressBar;
         }
 
         private void capybarasShopButton_Click(object sender, EventArgs e)
@@ -248,24 +229,22 @@ namespace CapybaraClicker
             foreach (Control control in capybarasPanel.Controls)
                 if (control is PictureBox capybaraCell && capybaraCell.Tag == ((Button)sender).Tag)
                 {
-                    var purchasedCapybara =
-                        _capybarasList.Find(capybara => capybara.Cost == int.Parse((string)capybaraCell.Tag));
-                    _sumMoney -= purchasedCapybara.Cost;
+                    var capybaraCost = int.Parse((string)capybaraCell.Tag);
+                    var purchasedCapybara = _model.BuyNewCapybara(capybaraCost);
                     ((Button)sender).Visible = false;
                     capybaraCell.Image = purchasedCapybara.Image;
                     capybaraCell.Enabled = true;
                 }
         }
 
-        private void modifButton_Click(object sender, EventArgs e)
+        private void modificationBuyButton_Click(object sender, EventArgs e)
         {
             var amountOfModif = (string)((Button)sender).Tag;
             var cost = int.Parse(amountOfModif);
-            _sumMoney -= cost;
-            var selectedModification = _modificationsList.FirstOrDefault(modification => modification.Cost == cost);
-            if (selectedModification != null)
+            var purchasedModification = _model.BuyNewModification(cost);
+            if (purchasedModification != null)
             {
-                ApplyModification(selectedModification);
+                ApplyModification(purchasedModification);
             }
         }
 
@@ -273,20 +252,20 @@ namespace CapybaraClicker
         {
             if (modification.Type == TypesOfModifications.AddCoinsPerSecond)
             {
-                _coinsPerSecond += modification.Bonus;
+                _model.ChangeCoinsPerSecond(modification.Bonus);
                 UpdateCoinsPerSecondLabel();
             }
             else
             {
-                _coinsPerClick += modification.Bonus;
+                _model.ChangeCoinsPerClick(modification.Bonus);
                 UpdateCoinsPerClickLabel();
             }
         }
 
         private void UpdateCoinsPerSecondLabel() =>
-            coinsPerSecondLabel.Text = $"{FormatCoinCount(_coinsPerSecond)} в сек.";
+            coinsPerSecondLabel.Text = $"{FormatCoinCount(_model.CoinsPerSecond)} в сек.";
 
         private void UpdateCoinsPerClickLabel() =>
-            coinsPerClickLabel.Text = $"{FormatCoinCount(_coinsPerClick)} за клик";
+            coinsPerClickLabel.Text = $"{FormatCoinCount(_model.CoinsPerClick)} за клик";
     }
 }
