@@ -212,6 +212,26 @@ namespace CapybaraClicker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap modifIcon5 {
+            get {
+                object obj = ResourceManager.GetObject("modifIcon5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap noSoundIcon {
+            get {
+                object obj = ResourceManager.GetObject("noSoundIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap questionIcon2 {
             get {
                 object obj = ResourceManager.GetObject("questionIcon2", resourceCulture);
@@ -235,6 +255,16 @@ namespace CapybaraClicker.Properties {
         internal static System.Drawing.Bitmap sky {
             get {
                 object obj = ResourceManager.GetObject("sky", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap soundIcon {
+            get {
+                object obj = ResourceManager.GetObject("soundIcon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

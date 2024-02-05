@@ -48,6 +48,11 @@
             this.capybaraFishCell = new System.Windows.Forms.PictureBox();
             this.capybaraChildCell = new System.Windows.Forms.PictureBox();
             this.modificationsPanel = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.modifButton5 = new System.Windows.Forms.Button();
+            this.smallModifLabel5 = new System.Windows.Forms.Label();
+            this.bigModifLabel5 = new System.Windows.Forms.Label();
+            this.modifIcon5 = new System.Windows.Forms.PictureBox();
             this.modifPanel4 = new System.Windows.Forms.Panel();
             this.modifButton4 = new System.Windows.Forms.Button();
             this.smallModifLabel4 = new System.Windows.Forms.Label();
@@ -77,6 +82,8 @@
             this.timerAddCoinsPerSecond = new System.Windows.Forms.Timer(this.components);
             this.smallCoinIcon2 = new System.Windows.Forms.PictureBox();
             this.coinsPerClickLabel = new System.Windows.Forms.Label();
+            this.onSoundButton = new System.Windows.Forms.Button();
+            this.offSoundButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.sky)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sky2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sky3)).BeginInit();
@@ -89,6 +96,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.capybaraFishCell)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.capybaraChildCell)).BeginInit();
             this.modificationsPanel.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.modifIcon5)).BeginInit();
             this.modifPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.modifIcon4)).BeginInit();
             this.modifPanel3.SuspendLayout();
@@ -339,6 +348,7 @@
             this.capybaraChildCell.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.capybaraChildCell.TabIndex = 0;
             this.capybaraChildCell.TabStop = false;
+            this.capybaraChildCell.Tag = "0";
             this.capybaraChildCell.MouseDown += new System.Windows.Forms.MouseEventHandler(this.capybaraCell_MouseDown);
             this.capybaraChildCell.MouseUp += new System.Windows.Forms.MouseEventHandler(this.capybaraCell_MouseUp);
             // 
@@ -346,6 +356,7 @@
             // 
             this.modificationsPanel.AutoScroll = true;
             this.modificationsPanel.BackColor = System.Drawing.Color.NavajoWhite;
+            this.modificationsPanel.Controls.Add(this.panel1);
             this.modificationsPanel.Controls.Add(this.modifPanel4);
             this.modificationsPanel.Controls.Add(this.modifPanel3);
             this.modificationsPanel.Controls.Add(this.modifPanel2);
@@ -354,6 +365,69 @@
             this.modificationsPanel.Name = "modificationsPanel";
             this.modificationsPanel.Size = new System.Drawing.Size(390, 381);
             this.modificationsPanel.TabIndex = 6;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.modifButton5);
+            this.panel1.Controls.Add(this.smallModifLabel5);
+            this.panel1.Controls.Add(this.bigModifLabel5);
+            this.panel1.Controls.Add(this.modifIcon5);
+            this.panel1.Location = new System.Drawing.Point(15, 414);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(351, 92);
+            this.panel1.TabIndex = 11;
+            this.panel1.Tag = "100000";
+            // 
+            // modifButton5
+            // 
+            this.modifButton5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.modifButton5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.modifButton5.Enabled = false;
+            this.modifButton5.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.modifButton5.ForeColor = System.Drawing.Color.White;
+            this.modifButton5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.modifButton5.Location = new System.Drawing.Point(264, 24);
+            this.modifButton5.Name = "modifButton5";
+            this.modifButton5.Size = new System.Drawing.Size(75, 40);
+            this.modifButton5.TabIndex = 7;
+            this.modifButton5.Tag = "100000";
+            this.modifButton5.Text = "100K";
+            this.modifButton5.UseVisualStyleBackColor = false;
+            this.modifButton5.Click += new System.EventHandler(this.modificationBuyButton_Click);
+            // 
+            // smallModifLabel5
+            // 
+            this.smallModifLabel5.AutoSize = true;
+            this.smallModifLabel5.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.smallModifLabel5.ForeColor = System.Drawing.Color.Firebrick;
+            this.smallModifLabel5.Location = new System.Drawing.Point(82, 46);
+            this.smallModifLabel5.Name = "smallModifLabel5";
+            this.smallModifLabel5.Size = new System.Drawing.Size(34, 24);
+            this.smallModifLabel5.TabIndex = 2;
+            this.smallModifLabel5.Tag = "smallLabel";
+            this.smallModifLabel5.Text = "???";
+            // 
+            // bigModifLabel5
+            // 
+            this.bigModifLabel5.AutoSize = true;
+            this.bigModifLabel5.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bigModifLabel5.ForeColor = System.Drawing.Color.Firebrick;
+            this.bigModifLabel5.Location = new System.Drawing.Point(82, 13);
+            this.bigModifLabel5.Name = "bigModifLabel5";
+            this.bigModifLabel5.Size = new System.Drawing.Size(39, 27);
+            this.bigModifLabel5.TabIndex = 1;
+            this.bigModifLabel5.Tag = "bigLabel";
+            this.bigModifLabel5.Text = "???";
+            // 
+            // modifIcon5
+            // 
+            this.modifIcon5.Image = global::CapybaraClicker.Properties.Resources.questionIcon2;
+            this.modifIcon5.Location = new System.Drawing.Point(12, 13);
+            this.modifIcon5.Name = "modifIcon5";
+            this.modifIcon5.Size = new System.Drawing.Size(64, 64);
+            this.modifIcon5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.modifIcon5.TabIndex = 0;
+            this.modifIcon5.TabStop = false;
             // 
             // modifPanel4
             // 
@@ -703,6 +777,31 @@
             this.coinsPerClickLabel.Text = "1 за клик";
             this.coinsPerClickLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // onSoundButton
+            // 
+            this.onSoundButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.onSoundButton.BackgroundImage = global::CapybaraClicker.Properties.Resources.soundIcon;
+            this.onSoundButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.onSoundButton.Location = new System.Drawing.Point(22, 479);
+            this.onSoundButton.Name = "onSoundButton";
+            this.onSoundButton.Size = new System.Drawing.Size(65, 60);
+            this.onSoundButton.TabIndex = 18;
+            this.onSoundButton.UseVisualStyleBackColor = false;
+            this.onSoundButton.Click += new System.EventHandler(this.onSoundButton_Click);
+            // 
+            // offSoundButton
+            // 
+            this.offSoundButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.offSoundButton.BackgroundImage = global::CapybaraClicker.Properties.Resources.noSoundIcon;
+            this.offSoundButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.offSoundButton.Location = new System.Drawing.Point(22, 479);
+            this.offSoundButton.Name = "offSoundButton";
+            this.offSoundButton.Size = new System.Drawing.Size(65, 60);
+            this.offSoundButton.TabIndex = 17;
+            this.offSoundButton.UseVisualStyleBackColor = false;
+            this.offSoundButton.Visible = false;
+            this.offSoundButton.Click += new System.EventHandler(this.offSoundButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -711,6 +810,8 @@
             this.BackgroundImage = global::CapybaraClicker.Properties.Resources.bg2;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1182, 553);
+            this.Controls.Add(this.offSoundButton);
+            this.Controls.Add(this.onSoundButton);
             this.Controls.Add(this.coinsPerClickLabel);
             this.Controls.Add(this.smallCoinIcon2);
             this.Controls.Add(this.smallCoinIcon1);
@@ -741,6 +842,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.capybaraFishCell)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.capybaraChildCell)).EndInit();
             this.modificationsPanel.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.modifIcon5)).EndInit();
             this.modifPanel4.ResumeLayout(false);
             this.modifPanel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.modifIcon4)).EndInit();
@@ -759,6 +863,16 @@
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.Button offSoundButton;
+
+        private System.Windows.Forms.Button onSoundButton;
+
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button modifButton5;
+        private System.Windows.Forms.Label smallModifLabel5;
+        private System.Windows.Forms.Label bigModifLabel5;
+        private System.Windows.Forms.PictureBox modifIcon5;
 
         private System.Windows.Forms.Label coinsPerClickLabel;
 

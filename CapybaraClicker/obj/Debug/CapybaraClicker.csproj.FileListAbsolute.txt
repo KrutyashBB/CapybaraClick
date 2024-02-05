@@ -9,3 +9,12 @@ C:\Users\Krutyash\RiderProjects\CapybaraClicker\CapybaraClicker\obj\Debug\Capyba
 C:\Users\Krutyash\RiderProjects\CapybaraClicker\CapybaraClicker\obj\Debug\CapybaraClicker.exe
 C:\Users\Krutyash\RiderProjects\CapybaraClicker\CapybaraClicker\obj\Debug\CapybaraClicker.pdb
 C:\Users\Krutyash\RiderProjects\CapybaraClicker\CapybaraClicker\obj\Debug\CapybaraClicker.Form1.resources
+C:\Users\Krutyash\RiderProjects\CapybaraClicker\CapybaraClicker\bin\Debug\EntityFramework.dll
+C:\Users\Krutyash\RiderProjects\CapybaraClicker\CapybaraClicker\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Krutyash\RiderProjects\CapybaraClicker\CapybaraClicker\bin\Debug\System.Data.SQLite.dll
+C:\Users\Krutyash\RiderProjects\CapybaraClicker\CapybaraClicker\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\Krutyash\RiderProjects\CapybaraClicker\CapybaraClicker\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\Krutyash\RiderProjects\CapybaraClicker\CapybaraClicker\bin\Debug\EntityFramework.xml
+C:\Users\Krutyash\RiderProjects\CapybaraClicker\CapybaraClicker\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Krutyash\RiderProjects\CapybaraClicker\CapybaraClicker\bin\Debug\System.Data.SQLite.xml
+C:\Users\Krutyash\RiderProjects\CapybaraClicker\CapybaraClicker\obj\Debug\CapybaraClicker.csproj.CopyComplete

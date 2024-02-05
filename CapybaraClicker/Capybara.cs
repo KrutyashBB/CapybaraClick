@@ -4,13 +4,16 @@ namespace CapybaraClicker
 {
     public class Capybara
     {
-        public Image Image { get; set; }
+        public Image ImgPath { get; set; }
         public int Cost { get; set; }
 
-        public Capybara(Image image, int cost)
+        public bool IsBuy { get; set; }
+
+        public Capybara(Image imgPath, int cost, bool isBuy)
         {
-            Image = image;
+            ImgPath = imgPath;
             Cost = cost;
+            IsBuy = isBuy;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Media;
 using System.Windows.Forms;
 using CapybaraClicker.Properties;
 
@@ -8,13 +9,45 @@ namespace CapybaraClicker
     public partial class Form1 : Form
     {
         readonly CustomProgressBar _customProgressBar = new CustomProgressBar();
+        private readonly SoundPlayer _soundPlayer = new SoundPlayer("capybaraMusic.wav");
         private GameModel _model;
 
         public Form1()
         {
+            _model = new GameModel();
             InitializeComponent();
             CreateProgressBar();
-            _model = new GameModel();
+            StartMusic();
+            InitializeCapybarasSkins();
+        }
+
+        private void InitializeCapybarasSkins()
+        {
+            foreach (Control control in capybarasPanel.Controls)
+            {
+                var capybara =
+                    _model._capybarasList.Find(capyb => capyb.Cost == int.Parse((string)control.Tag));
+
+                if (capybara.IsBuy)
+                {
+                    switch (control)
+                    {
+                        case PictureBox capybaraCell:
+                            capybaraCell.Image = capybara.ImgPath;
+                            capybaraCell.Enabled = true;
+                            break;
+                        case Button buyButton:
+                            buyButton.Visible = false;
+                            break;
+                    }
+                }
+            }
+        }
+
+        private void StartMusic()
+        {
+            _soundPlayer.LoadAsync();
+            _soundPlayer.PlayLooping();
         }
 
         private void CreateProgressBar()
@@ -51,6 +84,22 @@ namespace CapybaraClicker
             icon2X.BringToFront();
         }
 
+        private void onSoundButton_Click(object sender, EventArgs e)
+        {
+            onSoundButton.Visible = false;
+            offSoundButton.Visible = true;
+            if (_soundPlayer.IsLoadCompleted)
+                _soundPlayer.Stop();
+        }
+
+        private void offSoundButton_Click(object sender, EventArgs e)
+        {
+            onSoundButton.Visible = true;
+            offSoundButton.Visible = false;
+            if (_soundPlayer.IsLoadCompleted)
+                _soundPlayer.PlayLooping();
+        }
+
         private void timerAddCoinsPerSecond_Tick(object sender, EventArgs e)
         {
             _model.AddingCoinsPerSecond();
@@ -61,7 +110,7 @@ namespace CapybaraClicker
             if (_customProgressBar.Value > 0)
                 _customProgressBar.Value -= 1;
 
-            sumCoinsLabel.Text = FormatCoinCount(_model.GetSumCoins());
+            sumCoinsLabel.Text = FormatCoinsCount(_model.GetSumCoins());
 
             Update2XStatus();
             UpdateModificationsPanel();
@@ -69,7 +118,7 @@ namespace CapybaraClicker
             MoveSky();
         }
 
-        private static string FormatCoinCount(long count)
+        private static string FormatCoinsCount(long count)
         {
             if (count < 1000)
                 return count.ToString();
@@ -85,7 +134,7 @@ namespace CapybaraClicker
         private void Update2XStatus()
         {
             _model.Change2XStatus(_customProgressBar.Value >= 70);
-            coinsPerClickLabel.Text = $"{FormatCoinCount(_model.CoinsPerClick * (_model.Is2X ? 2 : 1))} за клик";
+            coinsPerClickLabel.Text = $"{FormatCoinsCount(_model.CoinsPerClick * (_model.Is2X ? 2 : 1))} за клик";
         }
 
         private void UpdateModificationsPanel()
@@ -232,8 +281,9 @@ namespace CapybaraClicker
                     var capybaraCost = int.Parse((string)capybaraCell.Tag);
                     var purchasedCapybara = _model.BuyNewCapybara(capybaraCost);
                     ((Button)sender).Visible = false;
-                    capybaraCell.Image = purchasedCapybara.Image;
+                    capybaraCell.Image = purchasedCapybara.ImgPath;
                     capybaraCell.Enabled = true;
+                    DataBase.UpdatePurchaseStateCapybara(purchasedCapybara);
                 }
         }
 
@@ -263,9 +313,9 @@ namespace CapybaraClicker
         }
 
         private void UpdateCoinsPerSecondLabel() =>
-            coinsPerSecondLabel.Text = $"{FormatCoinCount(_model.CoinsPerSecond)} в сек.";
+            coinsPerSecondLabel.Text = $"{FormatCoinsCount(_model.CoinsPerSecond)} в сек.";
 
         private void UpdateCoinsPerClickLabel() =>
-            coinsPerClickLabel.Text = $"{FormatCoinCount(_model.CoinsPerClick)} за клик";
+            coinsPerClickLabel.Text = $"{FormatCoinsCount(_model.CoinsPerClick)} за клик";
     }
 }

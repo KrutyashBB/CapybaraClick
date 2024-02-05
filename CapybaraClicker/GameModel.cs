@@ -9,17 +9,10 @@ namespace CapybaraClicker
     {
         public long SumMoney { get; private set; } = 50;
         public bool Is2X { get; private set; }
-        public int CoinsPerSecond { get; private set; }
-        public int CoinsPerClick { get; private set; } = 1;
+        public long CoinsPerSecond { get; private set; }
+        public long CoinsPerClick { get; private set; } = 1;
 
-        public List<Capybara> _capybarasList { get; private set; } = new List<Capybara>
-        {
-            new Capybara(Resources.capybara_fish, 100),
-            new Capybara(Resources.capybara_student, 1000),
-            new Capybara(Resources.capybara_cook, 8000),
-            new Capybara(Resources.capybara_skate, 75000),
-            new Capybara(Resources.capybara_board, 500000)
-        };
+        public List<Capybara> _capybarasList { get; private set; } = DataBase.SelectCapybaras();
 
         public List<Modification> _modificationsList { get; private set; } = new List<Modification>()
         {
@@ -30,7 +23,9 @@ namespace CapybaraClicker
             new Modification(Resources.modifIcon3, "Парочка", "+25 Монет в сек.", 1500, 25,
                 TypesOfModifications.AddCoinsPerSecond),
             new Modification(Resources.modifIcon4, "Мощный клик", "+50 Монет за клик", 10000, 50,
-                TypesOfModifications.AddCoinsPerClick)
+                TypesOfModifications.AddCoinsPerClick),
+            new Modification(Resources.modifIcon5, "Щепотка", "+2K Монет в сек.", 100000, 2000,
+                TypesOfModifications.AddCoinsPerSecond)
         };
 
 
