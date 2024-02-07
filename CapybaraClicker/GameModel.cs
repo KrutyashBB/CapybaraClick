@@ -7,36 +7,19 @@ namespace CapybaraClicker
 {
     public class GameModel
     {
-        public long SumMoney { get; private set; } = 50;
+        public long SumMoney { get; private set; } = DataBase.SelectSumMoney();
+        public long CoinsPerSecond { get; private set; } = DataBase.SelectCoinsPerSecond();
+        public long CoinsPerClick { get; private set; } = DataBase.SelectCoinsPerClick();
         public bool Is2X { get; private set; }
-        public long CoinsPerSecond { get; private set; }
-        public long CoinsPerClick { get; private set; } = 1;
 
         public List<Capybara> _capybarasList { get; private set; } = DataBase.SelectCapybaras();
 
-        public List<Modification> _modificationsList { get; private set; } = new List<Modification>()
-        {
-            new Modification(Resources.modifIcon1, "Монетка", "+1 Монета в сек.", 20, 1,
-                TypesOfModifications.AddCoinsPerSecond),
-            new Modification(Resources.modifIcon2, "Лёгкий клик", "+1 Монета за клик", 100, 1,
-                TypesOfModifications.AddCoinsPerClick),
-            new Modification(Resources.modifIcon3, "Парочка", "+25 Монет в сек.", 1500, 25,
-                TypesOfModifications.AddCoinsPerSecond),
-            new Modification(Resources.modifIcon4, "Мощный клик", "+50 Монет за клик", 10000, 50,
-                TypesOfModifications.AddCoinsPerClick),
-            new Modification(Resources.modifIcon5, "Щепотка", "+2K Монет в сек.", 100000, 2000,
-                TypesOfModifications.AddCoinsPerSecond)
-        };
+        public List<Modification> _modificationsList { get; private set; } = DataBase.SelectModifications();
 
 
         public void AddingCoinsPerSecond()
         {
             SumMoney += CoinsPerSecond;
-        }
-
-        public long GetSumCoins()
-        {
-            return SumMoney;
         }
 
         public void Change2XStatus(bool is2X)
@@ -73,17 +56,6 @@ namespace CapybaraClicker
         public void ChangeCoinsPerClick(int bonus)
         {
             CoinsPerClick += bonus;
-        }
-
-
-        public void AddCapybara(Capybara capybara)
-        {
-            _capybarasList.Add(capybara);
-        }
-
-        public void AddModification(Modification modification)
-        {
-            _modificationsList.Add(modification);
         }
     }
 }

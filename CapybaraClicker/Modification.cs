@@ -10,10 +10,11 @@ namespace CapybaraClicker
         public string SmallModifLabel { get; set; }
         public int Cost { get; set; }
         public int Bonus { get; set; }
-
+        public int NumberOfPurchase { get; set; }
         public TypesOfModifications Type { get; set; }
 
         public Modification(Image image, string bigModifLabel, string smallModifLabel, int cost, int bonus,
+            int numberOfPurchase,
             TypesOfModifications type)
         {
             Image = image;
@@ -21,6 +22,7 @@ namespace CapybaraClicker
             SmallModifLabel = smallModifLabel;
             Cost = cost;
             Bonus = bonus;
+            NumberOfPurchase = numberOfPurchase;
             Type = type;
         }
     }

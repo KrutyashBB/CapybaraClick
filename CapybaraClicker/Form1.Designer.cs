@@ -830,6 +830,7 @@
             this.Location = new System.Drawing.Point(15, 15);
             this.Name = "Form1";
             this.Text = "Capybara Game";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.sky)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sky2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sky3)).EndInit();

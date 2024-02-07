@@ -14,11 +14,13 @@ namespace CapybaraClicker
 
         public Form1()
         {
+            DataBase.SelectMoneyData();
             _model = new GameModel();
             InitializeComponent();
             CreateProgressBar();
             StartMusic();
             InitializeCapybarasSkins();
+            InitializeModifications();
         }
 
         private void InitializeCapybarasSkins()
@@ -40,6 +42,19 @@ namespace CapybaraClicker
                             buyButton.Visible = false;
                             break;
                     }
+                }
+            }
+        }
+
+        private void InitializeModifications()
+        {
+            foreach (Control modifPanel in modificationsPanel.Controls)
+            {
+                var costPanel = int.Parse((string)modifPanel.Tag);
+                var modif = _model._modificationsList.Find(modification => modification.Cost == costPanel);
+                if (modif.NumberOfPurchase > 0)
+                {
+                    UpdatePanelControls(modifPanel, modif);
                 }
             }
         }
@@ -110,7 +125,7 @@ namespace CapybaraClicker
             if (_customProgressBar.Value > 0)
                 _customProgressBar.Value -= 1;
 
-            sumCoinsLabel.Text = FormatCoinsCount(_model.GetSumCoins());
+            sumCoinsLabel.Text = FormatCoinsCount(_model.SumMoney);
 
             Update2XStatus();
             UpdateModificationsPanel();
@@ -294,6 +309,8 @@ namespace CapybaraClicker
             var purchasedModification = _model.BuyNewModification(cost);
             if (purchasedModification != null)
             {
+                purchasedModification.NumberOfPurchase++;
+                DataBase.UpdatePurchaseStateModification(purchasedModification);
                 ApplyModification(purchasedModification);
             }
         }
@@ -317,5 +334,10 @@ namespace CapybaraClicker
 
         private void UpdateCoinsPerClickLabel() =>
             coinsPerClickLabel.Text = $"{FormatCoinsCount(_model.CoinsPerClick)} за клик";
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DataBase.UpdateMoneyDataInDB(_model.SumMoney, _model.CoinsPerSecond, _model.CoinsPerClick);
+        }
     }
 }
