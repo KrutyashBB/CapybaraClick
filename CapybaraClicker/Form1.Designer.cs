@@ -125,7 +125,7 @@
             // sky2
             // 
             this.sky2.Image = global::CapybaraClicker.Properties.Resources.sky;
-            this.sky2.Location = new System.Drawing.Point(546, 193);
+            this.sky2.Location = new System.Drawing.Point(548, 215);
             this.sky2.Name = "sky2";
             this.sky2.Size = new System.Drawing.Size(190, 90);
             this.sky2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -136,7 +136,7 @@
             // sky3
             // 
             this.sky3.Image = global::CapybaraClicker.Properties.Resources.sky;
-            this.sky3.Location = new System.Drawing.Point(990, 63);
+            this.sky3.Location = new System.Drawing.Point(996, 119);
             this.sky3.Name = "sky3";
             this.sky3.Size = new System.Drawing.Size(190, 90);
             this.sky3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;

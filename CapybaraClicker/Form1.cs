@@ -8,9 +8,9 @@ namespace CapybaraClicker
 {
     public partial class Form1 : Form
     {
-        readonly CustomProgressBar _customProgressBar = new CustomProgressBar();
-        private readonly SoundPlayer _soundPlayer = new SoundPlayer("capybaraMusic.wav");
-        private GameModel _model;
+        private readonly CustomProgressBar _customProgressBar = new CustomProgressBar();
+        private readonly SoundPlayer _soundPlayer = new SoundPlayer("music.wav");
+        private readonly GameModel _model;
 
         public Form1()
         {
@@ -21,6 +21,11 @@ namespace CapybaraClicker
             StartMusic();
             InitializeCapybarasSkins();
             InitializeModifications();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DataBase.UpdateMoneyDataInDB(_model.SumMoney, _model.CoinsPerSecond, _model.CoinsPerClick);
         }
 
         private void InitializeCapybarasSkins()
@@ -53,9 +58,7 @@ namespace CapybaraClicker
                 var costPanel = int.Parse((string)modifPanel.Tag);
                 var modif = _model._modificationsList.Find(modification => modification.Cost == costPanel);
                 if (modif.NumberOfPurchase > 0)
-                {
                     UpdatePanelControls(modifPanel, modif);
-                }
             }
         }
 
@@ -334,10 +337,5 @@ namespace CapybaraClicker
 
         private void UpdateCoinsPerClickLabel() =>
             coinsPerClickLabel.Text = $"{FormatCoinsCount(_model.CoinsPerClick)} за клик";
-
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            DataBase.UpdateMoneyDataInDB(_model.SumMoney, _model.CoinsPerSecond, _model.CoinsPerClick);
-        }
     }
 }
